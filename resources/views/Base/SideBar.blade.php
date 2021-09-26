@@ -26,10 +26,23 @@
                 <span>Lokasi</span>
             </a>
         </li>
+<<<<<<< HEAD
         <li class="sidebar-item {{ Route::is('rkp.index') ? 'active' : '' }}">
             <a href="{{route('rkp.index')}}" class='sidebar-link'>
                 <i class="far fa-file-alt"></i>
                 <span>RKP</span>
+=======
+        <li class="sidebar-item {{ Route::is('kades.index') ? 'active' : '' }}">
+            <a href="{{route('kades.index')}}" class='sidebar-link'>
+                <i class="fas fa-hat-wizard"></i>
+                <span>Kades</span>
+            </a>
+        </li>
+        <li class="sidebar-item {{ Route::is('pemutakhiran.index') ? 'active' : '' }}">
+            <a href="{{route('pemutakhiran.index')}}" class='sidebar-link'>
+                <i class="fas fa-hourglass"></i>
+                <span>Pemutakhiran</span>
+>>>>>>> ecf26d8df5ce41e93cd5288194cb8d8525d4f24b
             </a>
         </li>
         <li class="sidebar-item {{ Route::is('contoh.index') ? 'active' : '' }}">

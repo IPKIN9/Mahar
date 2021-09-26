@@ -5,6 +5,8 @@ use App\Http\Controllers\DetailController;
 use App\Http\Controllers\BidangController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\RkpController;
+use App\Http\Controllers\KadesController;
+use App\Http\Controllers\PemutakhiranController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -49,4 +51,19 @@ Route::prefix('rkp')->group(function () {
     Route::get('getspecdata/{id}', [RkpController::class, 'edit']);
     Route::post('update', [RkpController::class, 'update'])->name('rkp.update');
     Route::delete('deletespecdata/{id}', [RkpController::class, 'delete']);
+});
+Route::group(['prefix' => 'kades'], function () {
+    Route::get('index', [KadesController::class, 'index'])->name('kades.index');
+    Route::post('insert', [KadesController::class, 'insert'])->name('kades.insert');
+    Route::get('getspecdata/{id}', [KadesController::class, 'edit']);
+    Route::post('update', [KadesController::class, 'update'])->name('kades.update');
+    Route::delete('deletespecdata/{id}', [KadesController::class, 'delete']);
+});
+
+Route::group(['prefix' => 'pemutakhiran'], function () {
+    Route::get('index', [PemutakhiranController::class, 'index'])->name('pemutakhiran.index');
+    Route::post('insert', [PemutakhiranController::class, 'insert'])->name('pemutakhiran.insert');
+    Route::get('getspecdata/{id}', [PemutakhiranController::class, 'edit']);
+    Route::post('update', [PemutakhiranController::class, 'update'])->name('pemutakhiran.update');
+    Route::delete('deletespecdata/{id}', [PemutakhiranController::class, 'delete']);
 });
