@@ -4,17 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Welcome to dashboard application</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ asset('assets/vendors/iconly/bold.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.css">
 </head>
 
 <body>
@@ -41,33 +45,57 @@
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
-
-            <div class="page-heading">
-                <h3>Welcome</h3>
-            </div>
             <div class="page-content">
                 @yield('content')
             </div>
+        </div>
+        <div class="modal fade text-left" id="univModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5 class="modal-title" id="myModalLabel1">Basic Modal</h5>
+                            </div>
+                            <div class="col-md-12">
+                                <small>Perhatikan saat melakukan perubahan data, pastikan semua field terisi sebelum
+                                    menekan
+                                    tombol kirim.</small>
+                            </div>
+                        </div>
+                        <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                    <form action="" method="POST" id="form-edit">
+                        @csrf
 
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2021 &copy; Mazer</p>
-                    </div>
-                    <div class="float-end">
-                        <p>Massogis Team</p>
-                    </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bx bx-check d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Kirim</span>
+                            </button>
+                            <button type="button" class="btn btn-secondary ml-1" data-bs-dismiss="modal">
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Close</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            </footer>
+            </div>
         </div>
     </div>
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-
-    <script src="{{ asset('assets/vendors/apexcharts/apexcharts.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
-
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.js"></script>
+    @yield('js')
 </body>
 
 </html>
