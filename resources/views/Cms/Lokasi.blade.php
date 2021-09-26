@@ -3,7 +3,7 @@
 <div class="page-title">
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Datatable Bidang</h3>
+            <h3>Datatable Lokasi</h3>
             <p class="text-subtitle text-muted">Data di render berdasarkan pagination</p>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
@@ -56,11 +56,12 @@
                                     menghapus data secara permanent.
                                 </p>
                                 <div class="table-responsive" style="margin-top: 50px;">
-                                    <table id="table-bidang" class="table table-lg">
+                                    <table id="table-lokasi" class="table table-lg">
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Nama Bidang</th>
+                                                <th>Nama Lokasi</th>
+                                                <th>Jenis</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -71,7 +72,8 @@
                                             @foreach ($data as $d)
                                             <tr>
                                                 <td>{{$no++}}</td>
-                                                <td>{{$d->nama_bidang}}</td>
+                                                <td>{{$d->nama_lokasi}}</td>
+                                                <td>{{$d->jenis}}</td>
                                                 <td style="width: 100px;">
                                                     <button type="button" id="btn-edit" data-id="{{$d->id}}"
                                                         class="btn icon icon-left btn-primary"><i
@@ -91,7 +93,7 @@
                                 <div style="margin-top: 30px;"></div>
                                 <h4 class="card-title">Tambah Data</h4>
                                 <div class="card-body">
-                                    <form action="{{route('bidang.insert')}}" method="POST">
+                                    <form action="{{route('lokasi.insert')}}" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-lg-1"></div>
@@ -101,13 +103,25 @@
                                                     menekan
                                                     tombol kirim</p>
                                                 <div class="row">
-                                                    <div class="col-md-12" style="margin-top: 10px;">
+                                                    <div class="col-md-6" style="margin-top: 10px;">
                                                         <fieldset>
                                                             <div class="form-group">
-                                                                <label for="nama_bidang">Nama Bidang</label>
+                                                                <label for="nama_lokasi">Nama Lokasi</label>
                                                                 <input type="text" class="form-control"
-                                                                    name="nama_bidang" placeholder="Input Here">
-                                                                @error('nama_bidang')
+                                                                    name="nama_lokasi" placeholder="Input Here">
+                                                                @error('nama_lokasi')
+                                                                <p class="text-danger">{{ $message }}</p>
+                                                                @enderror
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-6" style="margin-top: 10px;">
+                                                        <fieldset>
+                                                            <div class="form-group">
+                                                                <label for="jenis">Jenis</label>
+                                                                <input type="text" class="form-control" name="jenis"
+                                                                    placeholder="Input Here">
+                                                                @error('jenis')
                                                                 <p class="text-danger">{{ $message }}</p>
                                                                 @enderror
                                                             </div>
@@ -146,7 +160,7 @@
             }
         });
 
-        $('#table-bidang').DataTable();
+        $('#table-lokasi').DataTable();
 
         $(document).on('click', '#btn-edit', function()
         {
@@ -157,21 +171,30 @@
                 $('.modal-body').html('');
                 $('.modal-body').append(`
                 <div class="row">
-                    <div class="col-md-12" style="margin-top: 10px;">
+                    <div class="col-md-6" style="margin-top: 10px;">
                         <fieldset>
                             <div class="form-group">
-                                <label for="nama_bidang">Nama Bidang</label>
+                                <label for="nama_lokasi">Nama Lokasi</label>
                                 <input type="hidden" class="form-control"
                                     name="id" id="id" value="`+data.id+`">
                                 <input type="text" class="form-control"
-                                    name="nama_bidang" id="nama_bidang" value="`+data.nama_bidang+`">
+                                    name="nama_lokasi" id="nama_lokasi" value="`+data.nama_lokasi+`">
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6" style="margin-top: 10px;">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="jenis">Jenis</label>
+                                <input type="text" class="form-control" name="jenis" id="jenis"
+                                    value="`+data.jenis+`">
                             </div>
                         </fieldset>
                     </div>
                 </div>
                 `);
                 $('#univModal').modal('show');
-                $('#form-edit').attr('action',`{{route('bidang.update')}}`);
+                $('#form-edit').attr('action',`{{route('lokasi.update')}}`);
             });
         });
 

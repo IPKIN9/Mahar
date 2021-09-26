@@ -20,6 +20,12 @@
                 <span>Bidang</span>
             </a>
         </li>
+        <li class="sidebar-item {{ Route::is('lokasi.index') ? 'active' : '' }}">
+            <a href="{{route('lokasi.index')}}" class='sidebar-link'>
+                <i class="fas fa-street-view"></i>
+                <span>Lokasi</span>
+            </a>
+        </li>
         <li class="sidebar-item {{ Route::is('contoh.index') ? 'active' : '' }}">
             <a href="{{route('contoh.index')}}" class='sidebar-link'>
                 <i class="fas fa-ad"></i>
