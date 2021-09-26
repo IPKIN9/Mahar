@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Contoh\ContohController;
 use App\Http\Controllers\DetailController;
+use App\Http\Controllers\BidangController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,4 +24,13 @@ Route::group(['prefix' => 'detail'], function() {
     Route::post('update', [DetailController::class, 'update'])->name('detail.update');
     Route::delete('deletespecdata/{id}', [DetailController::class, 'delete']);
 });
+
+Route::group(['prefix' => 'bidang'], function() {
+    Route::get('index', [BidangController::class, 'index'])->name('bidang.index');
+    Route::post('insert', [BidangController::class, 'insert'])->name('bidang.insert');
+    Route::get('getspecdata/{id}', [BidangController::class, 'edit']);
+    Route::post('update', [BidangController::class, 'update'])->name('bidang.update');
+    Route::delete('deletespecdata/{id}', [BidangController::class, 'delete']);
+});
+
 

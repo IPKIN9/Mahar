@@ -14,6 +14,12 @@
                 <span>Detail</span>
             </a>
         </li>
+        <li class="sidebar-item {{ Route::is('bidang.index') ? 'active' : '' }}">
+            <a href="{{route('bidang.index')}}" class='sidebar-link'>
+                <i class="fas fa-cube"></i>
+                <span>Bidang</span>
+            </a>
+        </li>
         <li class="sidebar-item {{ Route::is('contoh.index') ? 'active' : '' }}">
             <a href="{{route('contoh.index')}}" class='sidebar-link'>
                 <i class="fas fa-ad"></i>
