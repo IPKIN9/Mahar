@@ -5,6 +5,7 @@ use App\Http\Controllers\DetailController;
 use App\Http\Controllers\BidangController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\KadesController;
+use App\Http\Controllers\PemutakhiranController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -50,6 +51,15 @@ Route::group(['prefix' => 'kades'], function() {
     Route::post('update', [KadesController::class, 'update'])->name('kades.update');
     Route::delete('deletespecdata/{id}', [KadesController::class, 'delete']);
 });
+
+Route::group(['prefix' => 'pemutakhiran'], function() {
+    Route::get('index', [PemutakhiranController::class, 'index'])->name('pemutakhiran.index');
+    Route::post('insert', [PemutakhiranController::class, 'insert'])->name('pemutakhiran.insert');
+    Route::get('getspecdata/{id}', [PemutakhiranController::class, 'edit']);
+    Route::post('update', [PemutakhiranController::class, 'update'])->name('pemutakhiran.update');
+    Route::delete('deletespecdata/{id}', [PemutakhiranController::class, 'delete']);
+});
+
 
 
 
