@@ -4,6 +4,7 @@ use App\Http\Controllers\Contoh\ContohController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\BidangController;
 use App\Http\Controllers\LokasiController;
+use App\Http\Controllers\KadesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,6 +42,15 @@ Route::group(['prefix' => 'lokasi'], function() {
     Route::post('update', [LokasiController::class, 'update'])->name('lokasi.update');
     Route::delete('deletespecdata/{id}', [LokasiController::class, 'delete']);
 });
+
+Route::group(['prefix' => 'kades'], function() {
+    Route::get('index', [KadesController::class, 'index'])->name('kades.index');
+    Route::post('insert', [KadesController::class, 'insert'])->name('kades.insert');
+    Route::get('getspecdata/{id}', [KadesController::class, 'edit']);
+    Route::post('update', [KadesController::class, 'update'])->name('kades.update');
+    Route::delete('deletespecdata/{id}', [KadesController::class, 'delete']);
+});
+
 
 
 
