@@ -16,7 +16,7 @@ class CreateRkpTable extends Migration
             $table->foreignId('id_lokasi')->constrained('lokasi');
             $table->string('perkiraan_volume');
             $table->string('sasaran');
-            $table->date('pelaksanaan');
+            $table->string('pelaksanaan');
             $table->integer('biaya');
             $table->string('sumber');
             $table->boolean('swa_kelola');

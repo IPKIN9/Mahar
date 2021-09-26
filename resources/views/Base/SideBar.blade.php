@@ -26,6 +26,12 @@
                 <span>Lokasi</span>
             </a>
         </li>
+        <li class="sidebar-item {{ Route::is('rkp.index') ? 'active' : '' }}">
+            <a href="{{route('rkp.index')}}" class='sidebar-link'>
+                <i class="far fa-file-alt"></i>
+                <span>RKP</span>
+            </a>
+        </li>
         <li class="sidebar-item {{ Route::is('contoh.index') ? 'active' : '' }}">
             <a href="{{route('contoh.index')}}" class='sidebar-link'>
                 <i class="fas fa-ad"></i>
