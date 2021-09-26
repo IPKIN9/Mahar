@@ -18,4 +18,13 @@ class RabModel extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function bidang_role()
+    {
+    return $this->belongsTo(BidangModel::class);
+    }
+    public function detail_role()
+    {
+    return $this->belongsTo(DetailModel::class);
+    }
 }

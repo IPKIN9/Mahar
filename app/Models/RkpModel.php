@@ -27,4 +27,12 @@ class RkpModel extends Model
         'created_at',
         'updated_at'
     ];
+    public function bidang_role()
+    {
+    return $this->belongsTo(BidangModel::class);
+    }
+    public function lokasi_role()
+    {
+    return $this->belongsTo(LokasiModel::class);
+    }
 }
