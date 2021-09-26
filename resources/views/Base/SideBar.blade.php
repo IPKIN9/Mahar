@@ -32,6 +32,12 @@
                 <span>Kades</span>
             </a>
         </li>
+        <li class="sidebar-item {{ Route::is('pemutakhiran.index') ? 'active' : '' }}">
+            <a href="{{route('pemutakhiran.index')}}" class='sidebar-link'>
+                <i class="fas fa-hourglass"></i>
+                <span>Pemutakhiran</span>
+            </a>
+        </li>
         <li class="sidebar-item {{ Route::is('contoh.index') ? 'active' : '' }}">
             <a href="{{route('contoh.index')}}" class='sidebar-link'>
                 <i class="fas fa-ad"></i>
