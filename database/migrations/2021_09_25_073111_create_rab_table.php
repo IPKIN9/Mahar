@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\BidangModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +16,7 @@ class CreateRabTable extends Migration
             $table->integer('jumlah');
             $table->timestamps();
         });
-    }         
+    }
 
     public function down()
     {

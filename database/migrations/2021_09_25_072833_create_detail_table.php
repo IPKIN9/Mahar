@@ -10,9 +10,11 @@ class CreateDetailTable extends Migration
     {
         Schema::create('detail', function (Blueprint $table) {
             $table->id();
+            $table->longText('uraian');
             $table->string('kode_detail');
             $table->integer('volume');
             $table->integer('harga_satuan');
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }
