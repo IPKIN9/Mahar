@@ -13,7 +13,6 @@ class RabModel extends Model
         'id',
         'id_bidang',
         'nama_pengeluaran',
-        'id_detail',
         'jumlah',
         'created_at',
         'updated_at'
@@ -23,8 +22,5 @@ class RabModel extends Model
     {
     return $this->belongsTo(BidangModel::class);
     }
-    public function detail_role()
-    {
-    return $this->belongsTo(DetailModel::class);
-    }
+  
 }
