@@ -13,7 +13,6 @@ class CreateRabTable extends Migration
             $table->id();
             $table->foreignId('id_bidang')->constrained('bidang');
             $table->string('nama_pengeluaran');
-            $table->foreignId('id_datail')->constrained('detail');
             $table->integer('jumlah');
             $table->timestamps();
         });
