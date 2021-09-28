@@ -10,9 +10,9 @@ class CreateRabTable extends Migration
     {
         Schema::create('rab', function (Blueprint $table) {
             $table->id();
+            $table->string('kode');
             $table->foreignId('id_bidang')->constrained('bidang');
             $table->string('nama_pengeluaran');
-            $table->foreignId('id_datail')->constrained('detail');
             $table->integer('jumlah');
             $table->timestamps();
         });

@@ -94,7 +94,7 @@
                                 <div style="margin-top: 30px;"></div>
                                 <h4 class="card-title">Tambah Data</h4>
                                 <div class="card-body">
-                                    <form action="{{route('contoh.insert')}}" method="POST">
+                                    <form action="{{route('rab.insert')}}" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-lg-1"></div>
@@ -149,21 +149,28 @@
                                                 <hr>
                                                 <div style="margin-top: 30px;"></div>
                                                 <div class="row" id="form-detail">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-6">
                                                         <fieldset>
                                                             <div class="form-group">
+                                                                <label for="">Kegiatan</label>
+                                                                <textarea readonly required name="jenis_kegiatan"
+                                                                    class="form-control" id="jkegiatan-add"
+                                                                    rows="4"></textarea>
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label for="">Waktu Pelaksanaan</label>
-                                                                <input required name="pelaksanaan" type="text"
-                                                                    class="form-control" id="" placeholder="Input Here">
+                                                                <input readonly required name="pelaksanaan" type="text"
+                                                                    class="form-control" id="pelaksanaan-add"
+                                                                    placeholder="Input Here">
                                                             </div>
                                                         </fieldset>
                                                     </div>
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-6">
                                                         <fieldset>
                                                             <div class="form-group">
                                                                 <label for="">Keluaran</label>
-                                                                <textarea name="nama_pengeluaran" class="form-control"
-                                                                    id="" rows="4"></textarea>
+                                                                <textarea required name="nama_pengeluaran"
+                                                                    class="form-control" id="" rows="4"></textarea>
                                                             </div>
                                                         </fieldset>
                                                     </div>
@@ -236,10 +243,11 @@
                                                                         <div class="col-sm-4">
                                                                             <fieldset>
                                                                                 <div class="form-group">
-                                                                                    <input disabled required
-                                                                                        name="jumlah1[]" type="number"
-                                                                                        class="form-control"
-                                                                                        id="jumlah1" disabled
+                                                                                    <input readonly required
+                                                                                        name="detail_jumlah[]"
+                                                                                        type="number"
+                                                                                        class="form-control count-input"
+                                                                                        id="jumlah1" readonly
                                                                                         placeholder="Input Here">
                                                                                 </div>
                                                                             </fieldset>
@@ -249,6 +257,45 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="row" style="margin-top: 30px;">
+                                                    <div class="col-md-6" style="text-align: right">
+                                                        <button type="button" id="hitung"
+                                                            class="btn icon icon-left btn-secondary">
+                                                            Hitung</button>
+                                                    </div>
+                                                    <div class="col-md-6 text-right" style="margin-top: -20px;">
+                                                        <div class="row">
+                                                            <div class="col-sm-8">
+                                                                <fieldset>
+                                                                    <div class="form-group">
+                                                                        <label for="">Anggaran Yang Tersedia</label>
+                                                                        <input required name="" readonly type="number"
+                                                                            class="form-control" id="anggaran"
+                                                                            placeholder="Input Here">
+                                                                    </div>
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <fieldset>
+                                                                    <div class="form-group">
+                                                                        <label for="">Total Biaya</label>
+                                                                        <input required name="total_jumlah"
+                                                                            type="number" readonly class="form-control"
+                                                                            id="jumlah" placeholder="Input Here">
+                                                                    </div>
+                                                                </fieldset>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="margin-top: 30px;">
+                                                    <div class="col-md-6 col-md-6" style="text-align: right">
+                                                        <button type="submit" class="btn icon icon-left btn-success"><i
+                                                                class="fas fa-paper-plane"></i>
+                                                            Kirim</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -296,6 +343,7 @@
 
         $(document).on('click', '#proses', function()
         {
+            $('#proses').html('Proses Ulang')
             let dataId = $('#select_bidang').val();
             let dataSub = $('#select_subbidang').val();
             let url = "getDetail/" + dataId;
@@ -306,7 +354,9 @@
                 data: { sub_bidang:dataSub },
                 success: function(data)
                 {
-                    console.log(data);
+                    $('#jkegiatan-add').val(data.jenis_kegiatan);
+                    $('#pelaksanaan-add').val(data.pelaksanaan);
+                    $('#anggaran').val(data.biaya);
                 }
             });
         });
@@ -371,10 +421,10 @@
                         <div class="col-sm-4">
                             <fieldset>
                                 <div class="form-group">
-                                    <input disabled required
-                                        name="jumlah1[]" type="number"
-                                        class="form-control" id="jumlah1-`+up+`"
-                                        disabled placeholder="Input Here">
+                                    <input readonly required
+                                        name="detail_jumlah[]" type="number"
+                                        class="form-control count-input" id="jumlah1-`+up+`"
+                                        placeholder="Input Here">
                                 </div>
                             </fieldset>
                         </div>
@@ -394,6 +444,18 @@
             $(document).on('click', `#remove-button-`+up+``,function()
             {
                 $("#remove-form"+up).remove();
+            });
+        });
+
+        $(document).on('click', '#hitung', function()
+        {
+            $('#hitung').html('Hitung Ulang')
+            $('#detail-form').each(function(){
+            var totalPoints = 0;
+            $(this).find('.count-input').each(function(){
+                totalPoints += parseInt($(this).val());
+            });
+            $('#jumlah').val(totalPoints);
             });
         });
     });

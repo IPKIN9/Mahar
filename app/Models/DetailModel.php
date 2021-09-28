@@ -7,16 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class DetailModel extends Model
 {
-    use HasFactory;
-    protected $table = "detail";
-    protected $fillable = [
-        'id',
-        'uraian',
-        'kode_detail',
-        'volume',
-        'harga_satuan',
-        'jumlah',
-        'created_at',
-        'updated_at'
-    ];
+        use HasFactory;
+        protected $table = "detail";
+        protected $fillable = [
+                'id',
+                'uraian',
+                'id_rab',
+                'kode_detail',
+                'volume',
+                'harga_satuan',
+                'jumlah',
+                'created_at',
+                'updated_at'
+        ];
+        public function rab_role()
+        {
+                return $this->belongsTo(RabModel::class, 'id_rab');
+        }
 }

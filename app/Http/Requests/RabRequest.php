@@ -16,8 +16,11 @@ class RabRequest extends FormRequest
         return [
             'id_bidang' => 'required|integer',
             'nama_pengeluaran' => 'required|max:255',
-            'id_detail' => 'required|integer',
             'jumlah' => 'required|numeric',
+            'uraian' => 'required',
+            'volume' => 'required|numeric',
+            'harga_satuan' => 'required|numeric',
+            'detail-jumlah' => 'required|numeric',
         ];
     }
 
