@@ -29,10 +29,10 @@ class RkpModel extends Model
     ];
     public function bidang_role()
     {
-    return $this->belongsTo(BidangModel::class);
+        return $this->belongsTo(BidangModel::class, 'id_bidang');
     }
     public function lokasi_role()
     {
-    return $this->belongsTo(LokasiModel::class);
+        return $this->belongsTo(LokasiModel::class, 'id_lokasi');
     }
 }

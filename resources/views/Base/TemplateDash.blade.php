@@ -19,6 +19,12 @@
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.css">
+    <style>
+        .anyClass {
+            height: 150px;
+            overflow-y: scroll;
+        }
+    </style>
 </head>
 
 <body>

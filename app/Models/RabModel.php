@@ -20,7 +20,6 @@ class RabModel extends Model
 
     public function bidang_role()
     {
-    return $this->belongsTo(BidangModel::class);
+        return $this->belongsTo(BidangModel::class, 'id_bidang');
     }
-  
 }
