@@ -40,7 +40,10 @@
                 <span>RKP</span>
             </a>
         </li>
-        <li class="sidebar-item {{ Route::is('rab.index') ? 'active' : '' }}">
+        <li class="sidebar-item 
+        {{ Route::is('rab.index') ? 'active' : '' }}
+        {{ Route::is('edit.rab') ? 'active' : '' }}
+        ">
             <a href="{{route('rab.index')}}" class='sidebar-link'>
                 <i class="fas fa-file-invoice"></i>
                 <span>RAB</span>

@@ -13,6 +13,7 @@ class RabModel extends Model
         'id',
         'kode',
         'id_bidang',
+        'id_rkp',
         'nama_pengeluaran',
         'jumlah',
         'created_at',
@@ -22,5 +23,9 @@ class RabModel extends Model
     public function bidang_role()
     {
         return $this->belongsTo(BidangModel::class, 'id_bidang');
+    }
+    public function rkp_role()
+    {
+        return $this->belongsTo(RkpModel::class, 'id_rkp');
     }
 }

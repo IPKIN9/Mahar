@@ -14,9 +14,7 @@ class DetailModel extends Model
                 'uraian',
                 'id_rab',
                 'kode_detail',
-                'volume',
-                'harga_satuan',
-                'jumlah',
+                'detail_jumlah',
                 'created_at',
                 'updated_at'
         ];

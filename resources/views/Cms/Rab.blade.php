@@ -61,8 +61,8 @@
                                         <thead>
                                             <tr>
                                                 <th style="width: 15px;">No.</th>
-                                                <th>Pengeluaran</th>
-                                                <th>Jumlah</th>
+                                                <th>Kegiatan</th>
+                                                <th>Jumlah Anggaran</th>
                                                 <th style="width: 100px;">Aksi</th>
                                             </tr>
                                         </thead>
@@ -73,12 +73,9 @@
                                             @foreach ($data['all'] as $d)
                                             <tr>
                                                 <td style="width: 15px;">{{$no++}}</td>
-                                                <td>{{$d->nama_pengeluaran}}</td>
+                                                <td>{{$d->rkp_role->jenis_kegiatan}}</td>
                                                 <td>{{$d->jumlah}}</td>
                                                 <td style="width: 100px;">
-                                                    <button type="button" id="btn-edit" data-id="{{$d->id}}"
-                                                        class="btn icon icon-left btn-primary"><i
-                                                            class="far fa-edit"></i></button>
                                                     <button type="button" id="btn-del" data-id="{{$d->id}}"
                                                         class="ml-1 btn icon icon-left btn-secondary"><i
                                                             class="fas fa-backspace"></i></button>
@@ -97,6 +94,7 @@
                                     <form action="{{route('rab.insert')}}" method="POST">
                                         @csrf
                                         <div class="row">
+                                            <input type="hidden" id="id_rkp" name="id_rkp">
                                             <div class="col-lg-1"></div>
                                             <div class="col-lg-12">
                                                 <p><b>Perhatian</b> Periksa kembali data yang telah di masukan
@@ -180,21 +178,19 @@
                                                 <div class="row">
                                                     <div class="card-body">
                                                         <div class="row mt-6">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-8">
                                                                 <div class="col-sm-12 text-left">Uraian</div>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                 <div class="row">
-                                                                    <div class="col-sm-4">Volume</div>
-                                                                    <div class="col-sm-4">Harga Satuan</div>
-                                                                    <div class="col-sm-4">Jumlah</div>
+                                                                    <div class="col-sm-12">Jumlah</div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div style="margin-top: 30px;"></div>
                                                         <div id="detail-form">
                                                             <div class="row">
-                                                                <div class="col-sm-6">
+                                                                <div class="col-sm-8">
                                                                     <div class="row">
                                                                         <div class="col-sm-1 text-left">
                                                                             <button type="button" data-id="1"
@@ -216,38 +212,16 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-6">
+                                                                <div class="col-sm-4">
                                                                     <div class="row">
-                                                                        <div class="col-sm-4">
+                                                                        <div class="col-sm-12">
                                                                             <fieldset>
                                                                                 <div class="form-group">
-                                                                                    <input value="0" required
-                                                                                        name="volume[]" type="number"
-                                                                                        class="form-control" id="volume"
-                                                                                        placeholder="Input Here">
-                                                                                </div>
-                                                                            </fieldset>
-                                                                        </div>
-                                                                        <div class="col-sm-4">
-                                                                            <fieldset>
-                                                                                <div class="form-group">
-                                                                                    <input value="0" required
-                                                                                        name="harga_satuan[]"
-                                                                                        type="number"
-                                                                                        class="form-control"
-                                                                                        id="harga_satuan"
-                                                                                        placeholder="Input Here">
-                                                                                </div>
-                                                                            </fieldset>
-                                                                        </div>
-                                                                        <div class="col-sm-4">
-                                                                            <fieldset>
-                                                                                <div class="form-group">
-                                                                                    <input readonly required
+                                                                                    <input required
                                                                                         name="detail_jumlah[]"
                                                                                         type="number"
                                                                                         class="form-control count-input"
-                                                                                        id="jumlah1" readonly
+                                                                                        id="jumlah1"
                                                                                         placeholder="Input Here">
                                                                                 </div>
                                                                             </fieldset>
@@ -311,6 +285,7 @@
         </div>
     </div>
 </section>
+
 @endsection
 @section('js')
 <script src="{{ asset('assets/vendors/choices.js/choices.min.js') }}"></script>
@@ -357,16 +332,9 @@
                     $('#jkegiatan-add').val(data.jenis_kegiatan);
                     $('#pelaksanaan-add').val(data.pelaksanaan);
                     $('#anggaran').val(data.biaya);
+                    $('#id_rkp').val(data.id);
                 }
             });
-        });
-
-        $("#harga_satuan, #volume").keyup(function() {
-            var harga  = $("#harga_satuan").val();
-            var jumlah = $("#volume").val();
-
-            var total = parseInt(harga) * parseInt(jumlah);
-            $("#jumlah1").val(total);
         });
 
         $(document).on('click', '#add-form', function()
@@ -376,7 +344,7 @@
             $('#counter-up').val(up);
             $('#detail-form').append(`
             <div class="row" id="remove-form`+up+`">
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <div class="row">
                         <div class="col-sm-1 text-left">
                             <button id="remove-button-`+up+`" type="button"
@@ -395,33 +363,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-12">
                             <fieldset>
                                 <div class="form-group">
-                                    <input value="0" required
-                                        name="volume[]" type="number"
-                                        class="form-control" id="volume-`+up+`"
-                                        placeholder="Input Here">
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="col-sm-4">
-                            <fieldset>
-                                <div class="form-group">
-                                    <input value="0" required
-                                        name="harga_satuan[]" type="number"
-                                        class="form-control"
-                                        id="harga_satuan-`+up+`"
-                                        placeholder="Input Here">
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="col-sm-4">
-                            <fieldset>
-                                <div class="form-group">
-                                    <input readonly required
+                                    <input required
                                         name="detail_jumlah[]" type="number"
                                         class="form-control count-input" id="jumlah1-`+up+`"
                                         placeholder="Input Here">
@@ -433,14 +380,6 @@
                 </div>
             </div>
             `);
-            $(`#volume-`+up+`, #harga_satuan-`+up+``).keyup(function()
-            {
-                var harga  = $("#harga_satuan-"+up).val();
-                var jumlah = $("#volume-"+up).val();
-
-                var total = parseInt(harga) * parseInt(jumlah);
-                $("#jumlah1-"+up).val(total);
-            });
             $(document).on('click', `#remove-button-`+up+``,function()
             {
                 $("#remove-form"+up).remove();
@@ -449,7 +388,7 @@
 
         $(document).on('click', '#hitung', function()
         {
-            $('#hitung').html('Hitung Ulang')
+            $('#hitung').html('Hitung Ulang');
             $('#detail-form').each(function(){
             var totalPoints = 0;
             $(this).find('.count-input').each(function(){
@@ -457,6 +396,45 @@
             });
             $('#jumlah').val(totalPoints);
             });
+        });
+
+        $(document).on('click','#btn-del',function(){
+            let dataId = $(this).data('id');
+            Swal.fire({
+            title: 'Anda Yakin?',
+            text: "Data ini mungkin terhubung ke tabel yang lain!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "deletespecdata/" + dataId,
+                        type: 'delete',
+                        success: function () {
+                            Swal.fire({
+                                title: 'Hapus!',
+                                text: 'Data berhasl di hapus.',
+                                icon: 'success',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Oke'
+                            }).then((result) => {
+                                location.reload();
+                            });
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Ada yang salah!',
+                            });
+                        }
+                    })
+                }
+            })
         });
     });
 </script>
