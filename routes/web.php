@@ -58,6 +58,7 @@ Route::group(['prefix' => 'pemutakhiran'], function() {
     Route::get('getspecdata/{id}', [PemutakhiranController::class, 'edit']);
     Route::post('update', [PemutakhiranController::class, 'update'])->name('pemutakhiran.update');
     Route::delete('deletespecdata/{id}', [PemutakhiranController::class, 'delete']);
+    Route::get('pdf', [PemutakhiranController::class, 'createpdf'])->name('pdf');
 });
 
 
