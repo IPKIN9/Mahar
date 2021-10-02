@@ -7,6 +7,8 @@ use App\Models\PemutakhiranModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Throwable;
+use PDF;
+use PDO;
 
 class PemutakhiranController extends Controller
 {
@@ -64,5 +66,11 @@ class PemutakhiranController extends Controller
     {
         PemutakhiranModel::where('id', $id)->delete();
         return response()->json();
+    }
+    public function createpdf()
+    {
+        $data = PemutakhiranModel::all();
+        $pdf = PDF::loadView('PDF\PDFPemutakhiran', ['data' => $data]);
+        return $pdf->stream();
     }
 }

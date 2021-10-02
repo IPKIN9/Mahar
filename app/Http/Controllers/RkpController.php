@@ -6,6 +6,7 @@ use App\Http\Requests\RkpRequest;
 use App\Models\BidangModel;
 use App\Models\LokasiModel;
 use App\Models\RkpModel;
+use PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Throwable;
@@ -90,5 +91,18 @@ class RkpController extends Controller
     {
         RkpModel::where('id', $id)->delete();
         return response()->json();
+    }
+
+    public function createpdf()
+    {
+        $date = Carbon::now();
+        $data = array(
+            'all' => RkpModel::all(),
+            'bidang' => BidangModel::all(),
+            'lokasi' => LokasiModel::all(),
+            'date' => Carbon::now()->format('Y')
+        );
+        $pdf = PDF::loadView('PDF\RKP_PDF', ['data' => $data], ['date'=>$date])->setPaper('F4', 'landscape');
+        return $pdf->stream();
     }
 }

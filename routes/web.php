@@ -44,6 +44,7 @@ Route::prefix('rkp')->group(function () {
     Route::get('getspecdata/{id}', [RkpController::class, 'edit']);
     Route::post('update', [RkpController::class, 'update'])->name('rkp.update');
     Route::delete('deletespecdata/{id}', [RkpController::class, 'delete']);
+    Route::get('pdf', [RkpController::class, 'createpdf'])->name('rkp.pdf');
 });
 
 Route::prefix('rab')->group(function () {
@@ -71,4 +72,10 @@ Route::group(['prefix' => 'pemutakhiran'], function () {
     Route::get('getspecdata/{id}', [PemutakhiranController::class, 'edit']);
     Route::post('update', [PemutakhiranController::class, 'update'])->name('pemutakhiran.update');
     Route::delete('deletespecdata/{id}', [PemutakhiranController::class, 'delete']);
+    Route::get('pdf', [PemutakhiranController::class, 'createpdf'])->name('pdf');
 });
+
+Route::get('pdfrkp', function()
+    {
+        return view('PDF.RKP_PDF');
+    });
