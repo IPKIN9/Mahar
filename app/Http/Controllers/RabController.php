@@ -9,7 +9,9 @@ use App\Models\RabModel;
 use App\Models\RkpModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
+use PDF;
 
 class RabController extends Controller
 {
@@ -182,5 +184,25 @@ class RabController extends Controller
         }
         RabModel::where('id', $id)->delete();
         return response()->json();
+    }
+
+    public function pdfPrint($id)
+    {
+        Blade::directive('currency', function ($expression) {
+            return "Rp. <?php echo number_format($expression,0,',','.'); ?>";
+        });
+        $rab = RabModel::where('id', $id)->with('bidang_role', 'rkp_role')->first();
+        $detail = DetailModel::where('id_rab', $id)->get();
+        $sum = $detail->sum('detail_jumlah');
+        $today = Carbon::now()->isoFormat('D MMMM Y');
+        $data = array(
+            'rab' => $rab,
+            'detail' => $detail,
+            'count' => $sum,
+            'date' => $today,
+        );
+        // return view('Pdf.RabPdf')->with('data', $data);
+        $pdf = PDF::loadView('Pdf.RabPdf', ['data' => $data]);
+        return $pdf->stream();
     }
 }

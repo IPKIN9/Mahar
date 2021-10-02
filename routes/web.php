@@ -14,11 +14,6 @@ Route::get('/', function () {
     return view('Base.TemplateDash');
 })->name('dashboard.index');
 
-
-Route::get('cetakRab', function () {
-    return view('Pdf.Export');
-});
-
 Route::prefix('contoh')->group(function () {
     Route::get('index', [ContohController::class, 'index'])->name('contoh.index');
     Route::post('insert', [ContohController::class, 'insert'])->name('contoh.insert');
@@ -56,9 +51,10 @@ Route::prefix('rab')->group(function () {
     Route::get('getsubbidang/{id}', [RabController::class, 'sub_bidang']);
     Route::get('getDetail/{id}', [RabController::class, 'detail']);
     Route::post('insert', [RabController::class, 'insert'])->name('rab.insert');
-    Route::get('viewdata/{id}', [RabController::class, 'view'])->name('edit.rab');
-    Route::post('update', [RabController::class, 'update'])->name('rab.update');
+    // Route::get('viewdata/{id}', [RabController::class, 'view'])->name('edit.rab');
+    // Route::post('update', [RabController::class, 'update'])->name('rab.update');
     Route::delete('deletespecdata/{id}', [RabController::class, 'delete']);
+    Route::get('cetakRab/{id}', [RabController::class, 'pdfPrint']);
 });
 
 Route::group(['prefix' => 'kades'], function () {
