@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LokasiSeeder::class);
         $this->call(BidangSeeder::class);
         $this->call(RkpSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }
