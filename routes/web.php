@@ -3,6 +3,7 @@
 use App\Http\Controllers\Contoh\ContohController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\BidangController;
+use App\Http\Controllers\DahsboardController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\RkpController;
 use App\Http\Controllers\KadesController;
@@ -10,14 +11,7 @@ use App\Http\Controllers\PemutakhiranController;
 use App\Http\Controllers\RabController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('Base.TemplateDash');
-})->name('dashboard.index');
-
-
-Route::get('cetakRab', function () {
-    return view('Pdf.Export');
-});
+Route::get('/', [DahsboardController::class, 'index'])->name('dashboard.index');
 
 Route::prefix('contoh')->group(function () {
     Route::get('index', [ContohController::class, 'index'])->name('contoh.index');
@@ -57,9 +51,10 @@ Route::prefix('rab')->group(function () {
     Route::get('getsubbidang/{id}', [RabController::class, 'sub_bidang']);
     Route::get('getDetail/{id}', [RabController::class, 'detail']);
     Route::post('insert', [RabController::class, 'insert'])->name('rab.insert');
-    Route::get('viewdata/{id}', [RabController::class, 'view'])->name('edit.rab');
-    Route::post('update', [RabController::class, 'update'])->name('rab.update');
+    // Route::get('viewdata/{id}', [RabController::class, 'view'])->name('edit.rab');
+    // Route::post('update', [RabController::class, 'update'])->name('rab.update');
     Route::delete('deletespecdata/{id}', [RabController::class, 'delete']);
+    Route::get('cetakRab/{id}', [RabController::class, 'pdfPrint']);
 });
 
 Route::group(['prefix' => 'kades'], function () {
@@ -79,7 +74,6 @@ Route::group(['prefix' => 'pemutakhiran'], function () {
     Route::get('pdf', [PemutakhiranController::class, 'createpdf'])->name('pdf');
 });
 
-Route::get('pdfrkp', function()
-    {
-        return view('PDF.RKP_PDF');
-    });
+Route::get('pdfrkp', function () {
+    return view('PDF.RKP_PDF');
+});

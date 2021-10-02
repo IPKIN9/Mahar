@@ -76,6 +76,9 @@
                                                 <td>{{$d->rkp_role->jenis_kegiatan}}</td>
                                                 <td>{{$d->jumlah}}</td>
                                                 <td style="width: 100px;">
+                                                    <a href="cetakRab/{{$d->id}}"
+                                                        class="ml-1 btn icon icon-left btn-primary"><i
+                                                            class="fas fa-print"></i></a>
                                                     <button type="button" id="btn-del" data-id="{{$d->id}}"
                                                         class="ml-1 btn icon icon-left btn-secondary"><i
                                                             class="fas fa-backspace"></i></button>
