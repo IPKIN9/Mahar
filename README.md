@@ -21,3 +21,11 @@ composer install
 ```
 php artisan key:generate
 ```
+<br />
+
+## Migrate Table
+
+Use this command to migrate table
+```
+php artisan migrate:fresh --seed
+```
