@@ -20,7 +20,14 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-header">
-                        <h5 class="text-success">Petunjuk</h5>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <h5 class="text-success">Petunjuk</h5>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="btn btn-info" target="blank" href="{{route('rkp.pdf')}}">Export to PDF</a>
+                            </div>
+                        </div>
                         <br>
                         @if (session('status'))
                         <span class="badge bg-success">Success. {{ session('status') }}</span>
