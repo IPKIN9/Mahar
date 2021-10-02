@@ -3,6 +3,7 @@
 use App\Http\Controllers\Contoh\ContohController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\BidangController;
+use App\Http\Controllers\DahsboardController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\RkpController;
 use App\Http\Controllers\KadesController;
@@ -10,9 +11,7 @@ use App\Http\Controllers\PemutakhiranController;
 use App\Http\Controllers\RabController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('Base.TemplateDash');
-})->name('dashboard.index');
+Route::get('/', [DahsboardController::class, 'index'])->name('dashboard.index');
 
 Route::prefix('contoh')->group(function () {
     Route::get('index', [ContohController::class, 'index'])->name('contoh.index');
@@ -75,7 +74,6 @@ Route::group(['prefix' => 'pemutakhiran'], function () {
     Route::get('pdf', [PemutakhiranController::class, 'createpdf'])->name('pdf');
 });
 
-Route::get('pdfrkp', function()
-    {
-        return view('PDF.RKP_PDF');
-    });
+Route::get('pdfrkp', function () {
+    return view('PDF.RKP_PDF');
+});
